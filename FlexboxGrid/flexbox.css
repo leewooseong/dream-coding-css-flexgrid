@@ -1,0 +1,116 @@
+.container {
+  background-color: beige;
+  /* 
+        vh? %?
+        % : 부모의 높이에 100%를 채우겠다.
+        vh : viewport height_부모에 상관없이 보이는 뷰포트의 %로 반영하겠다. 
+    */
+  height: 100vh;
+
+  /* container 레벨의 속성 값들 */
+
+  /* 1. flexbox로 만들고 싶다면 */
+  display: flex;
+
+  /* 2. flex의 방향을 설정_중심축 설정 + (아이템 배치 + 원소 순서) */
+  flex-direction: row; /*왼쪽 정렬 + 원소 시작점(왼 -> 오)_(1,2,3,4,5,...)*/
+  /* flex-direction: row-reverse; 오른쪽 정렬 + 원소 시작점(오 -> 왼)_(...,4,3,2,1) */
+  /* flex-direction: column; 정렬 위 -> 아래*/
+  /* flex-direction: column-reverse; 아래 -> 위*/
+
+  /* 3.
+    flex-wrap: nowrap | wrap | wrap-reverse
+    flex-wrap: nowrap_nowrap일 때 아이템이 많아도 한줄에 표시
+    flex-wrap: wrap_wrap일 때 아이템이 많으면 화면이 줄어들 때 다음 줄에 표시 
+    flex-wrap: wrap-reverse_wrap일 때와 반대 방향으로 줄바꿈(아래에서 위)
+    */
+  flex-wrap: nowrap;
+
+  /* 4. flex-direction flex-wrap을 합친 것*/
+  /* flex-flow: row nowrap; */
+
+  /* 5. 아이템을 어떻게 배치할 것인가(main axis_중심 축) */
+  /*(default 값) 아이템의 순서는 유지(2.의 row-reverse or column-reverse와 다른점) 축이 가로 축이라면 왼쪽 -> 오른쪽, 축이 새로 축이라면 위쪽 -> 아래쪽*/
+  /* justify-content: flex-start; */
+  /* 아이템의 순서는 유지, 축이 가로 축이 오른쪽 배치, 축이 새로 축이라면 아래쪽 배치 */
+  /* justify-content: flex-end;  */
+  /* 아이템 순서 유지해서 중앙정렬 */
+  justify-content: center;
+  /* 박스 사이(양 옆) 공백을 넣어줌_첫 번째, 마지막 번째 공백이 상대적으로 작다. */
+  /* justify-content: space-around; */
+  /* 짝 수 번째 박스에만 공백? 모든 박스 사이에 공백을 일정하게 유지 */
+  /* justify-content: space-evenly; */
+  /* 첫 번째, 마지막 원소는 공백 x, 중간 원소들은 공백을 가지게 */
+  /* justify-content: space-between; */
+
+  /* 6. 반대 축의 아이템 배치에 대한 것_새로나온 속성들은 브라우저 지원율이 떨어지기 때문에 잘 보고 사용하여야한다. */
+  /* 세로로 중앙 정렬 */
+  /* align-items: center; */
+  /* 텍스트의 베이스라인에 맞게 정렬 */
+  /* align-items: baseline; */
+  /* 7. 반대 축에서의 justify-content_justify-content의 속성을 모두 사용 가능하다.*/
+  /* align-content: center; */
+
+  /* ※ align-content 는 줄 사이의 간격을 결정하는 반면, align-items 는 전체 항목이 컨테이너 내에서 정렬되는 방식을 결정합니다. 한 줄만 있으면 align-content 가 효과가 없습니다. */
+}
+
+.item {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+}
+/* flex 속성: 값의 비율로 아이템에 신축성을 부여하는 것 */
+/* flex: 1 로 쓰면? */
+/* flex-grow, shrink를 한번에 나타낼 수 있으며, flex-basis가 자동으로 0으로 적용된다. */
+
+/* flex-grow */
+/* 화면의 남은 공간을 꽉 채워준다. 여백을 비율로 나눠서 각 아이템에 제공_공간을 채우려 성장한다.(가로)_flex-grow: 값으로 남은 여백크기를 비율만큼 가져와 채울 수 있다._비율은 자신의 크기를 찾기까지 유지됨  */
+.item1 {
+  background: #ef9a9a;
+  padding: 20px;
+  flex-grow: 1;
+}
+.item2 {
+  background: #f48fb1;
+  flex-grow: 2;
+}
+/* flex-shrink */
+/* 컨테이너가 점점 작아졌을 때 어떻게 행동하느냐를 지정_줄어드는 비율을 설정 클수록 많이 줄어든다. */
+.item3 {
+  background: #ce93d8;
+  flex-shrink: 2;
+}
+.item4 {
+  background: #b39ddb;
+  flex-shrink: 1;
+}
+/* flex-basis */
+/* 플레스 아이템의 초기 크기를 지정해준다_공간을 얼마나 차지해야하는지 좀 더 세부적으로 명시해주는 것_ flex-grow, flex-shrink를 합친 것처럼 비율을 지정하면 늘어날때 줄어들때 한번에 적용  */
+.item5 {
+  background: #90caf9;
+  flex-basis: 50%;
+}
+.item6 {
+  background: #a5d6a7;
+}
+/* order을 지정해서 order 지정한 객체들 끼리의 순서를 정할 수 있다._잘 쓰이진 않는다. */
+.item7 {
+  order: 2;
+  background: #e6ee9c;
+}
+.item8 {
+  background: ;
+  order: 3;
+}
+/* align-self */
+/* 
+    justify-content, align-items, align-content를 통해 아이템을 골고루 배치한다면
+    아이템 별로 아이템들을 정렬 가능
+*/
+.item9 {
+  align-self: center;
+  background: ;
+}
+.item10 {
+  background: ;
+}
